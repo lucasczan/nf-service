@@ -1,0 +1,162 @@
+##Provider
+
+###
+# @name createProvider
+POST http://localhost:3000/providers
+Content-Type: application/json
+
+{
+    "document": "33333",
+    "company_name": "Test Company",
+    "company_is_active": true,
+    "main_CNAE": "1234567",
+    "simples_nacional_optant": false,
+    "mei_optant": false,
+    "municipal_registration": "12345",
+    "address": {
+        "municipality_code": "3518800",
+        "siafi_code": "1234",
+        "ibge_code": "1234",
+        "municipality_name": "Test City",
+        "street_name": "Test Street",
+        "complement": "Test Complement",
+        "number": "123",
+        "neighborhood": "Test Neighborhood",
+        "zip_code": "12345678",
+        "state": "SP"
+    }
+}
+
+###
+# @name getProviderByDocument
+GET http://localhost:3000/providers/1111111
+
+###
+
+PATCH http://localhost:3000/providers/{{createProvider.response.body.$.id}}
+Content-Type: application/json
+
+{
+    "document": "77777",
+    "company_name": "Updated Company",
+    "company_is_active": true,
+    "main_CNAE": "7654321",
+    "simples_nacional_optant": true,
+    "mei_optant": true,
+    "municipal_registration": "7777",
+    "address": {
+        "municipality_code": "77777",
+        "siafi_code": "7777",
+        "ibge_code": "7777",
+        "municipality_name": "Updated City",
+        "street_name": "Updated Street",
+        "complement": "Updated Complement",
+        "number": "777",
+        "neighborhood": "Updated Neighborhood",
+        "zip_code": "77777777",
+        "state": "SP"
+    }
+}
+
+###
+
+## Invoices
+@provider_document = 1111111
+@date = 2025-04-25T12:00:00.000Z
+
+# @name createInvoice
+POST http://localhost:3000/invoices
+Content-Type: application/json
+
+{
+    "issueDate":"{{date}}",
+    "provider": {
+	    "document":"1111111"
+    },
+    "customer": {
+        "document":"47187688881",
+        "document_type":"cpf",
+        "companyName":"Test Customer",
+        "email": "icloud.lucasc@gmail.com",
+        "address": {
+            "street_name":"av felicio marinelli",
+            "number":"420a",
+            "complement":"Apto 123",
+            "neighborhood":"Jd Medina",
+            "municipality_code": "1",
+            "state":"sp",
+            "zip_code":"08556200"
+        }
+    },
+    "service": {
+        "tax_rate": 1,
+        "description": "oi",
+        "with_held_iss": false,
+        "service_list_item": "123456",
+        "municipal_tax_code": "123456",
+        "service_value": 100
+    }
+}
+
+###
+
+## List Invoices
+@provider_document = 1111111
+
+# @name ListInvoices
+GET http://localhost:3000/invoices/{{provider_document}}?page=1&recordsPerPage=10&status=pending&search=lucas
+Content-Type: application/json
+
+###
+
+## Change Invoice Status
+@invoice_id = 64262d6d-b609-4274-98e1-a80e561f222d
+@status = pending
+
+# @name changeInvoiceStatus
+POST http://localhost:3000/invoices/{{invoice_id}}/status
+Content-Type: application/json
+
+{
+    "status": "{{status}}"
+}
+
+###
+# @name emmitInvoices
+POST http://localhost:3000/invoices/emmit
+Content-Type: application/json
+
+[
+    "{{invoice_id}}"
+]
+
+###
+
+###
+
+## Cancel Invoice
+@invoice_id = 6af292ea-3f86-4ee1-a46e-c186c976aefd
+
+# @name cancelInvoice
+POST http://localhost:3000/invoices/{{invoice_id}}/cancel
+Content-Type: application/json
+
+###
+
+## Update Invoice
+@invoice_id = 616f9a0f-c058-4c33-87cc-4c7fbe6aff75
+
+# @name updateInvoice
+PATCH http://localhost:3000/invoices/{{invoice_id}}
+Content-Type: application/json
+
+{
+    "service": {
+        "service_value": 1000,
+        "tax_rate": 10,
+        "description": "Test Description23",
+        "with_held_iss": true,
+        "service_list_item": "123456",
+        "municipal_tax_code": "123456"
+    }
+}
