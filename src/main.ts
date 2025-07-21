@@ -1,9 +1,9 @@
 import { startHttpApplication } from "./infra/http/start";
-import { receiveQueueMessages } from "./infra/queue/sqs.queue";
+// import { receiveQueueMessages } from "./infra/queue/sqs.queue";
 
 async function bootstrap() {
 	startHttpApplication();
-	receiveQueueMessages();
+	// receiveQueueMessages();
 }
 
 bootstrap();

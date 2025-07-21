@@ -12,7 +12,7 @@ import { ProviderNotFoundException } from "src/domains/application/exceptions/pr
 import { SERVICE_INVOICE_STATUS_ENUM } from "src/domains/enterprise/entities/service-invoice";
 
 const sqsClient = new SQSClient({
-    region: process.env.region, 
+    region: process.env.region,
     credentials: {
         accessKeyId: process.env.AWS_ACCESS_KEY_ID ?? "",
         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY ?? "",
@@ -47,7 +47,7 @@ async function receiveQueueMessages() {
                 provider: {
                     document: data.body.document,
                 },
-                issueDate: data.body.created_at, // ok
+                issue_date: data.body.created_at, // ok
                 service: {
                     tax_rate: data.body.service.tax_rate,
                     description: data.body.service.description,

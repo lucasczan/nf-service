@@ -13,13 +13,13 @@ import { IUpdateServiceInvoiceDTO } from "src/domains/application/dtos/service-i
 
 @Controller("/invoices")
 class InvoiceController {
-    constructor(private invoiceService: InvoiceService) {}
+    constructor(private invoiceService: InvoiceService) { }
 
     @Post()
     create(@Body() body: ICreateInvoiceDTO) {
         const {
             customer,
-            issueDate,
+            issue_date,
             provider,
             status,
             service,
@@ -27,7 +27,7 @@ class InvoiceController {
         } = body;
         return this.invoiceService.createInvoice({
             customer,
-            issueDate,
+            issue_date,
             service: service,
             notes,
             provider,

@@ -115,7 +115,7 @@ class ServiceInvoiceMongooseRepository implements IInvoiceRepository {
     private toDomain(document: ServiceInvoiceDocument): ServiceInvoice {
         return ServiceInvoice.create(
             {
-                issueDate: document.issueDate.toISOString(),
+                issue_date: document.issue_date.toISOString(),
                 status: document.status as SERVICE_INVOICE_STATUS_ENUM,
                 notes: document.notes,
                 provider: document.provider,

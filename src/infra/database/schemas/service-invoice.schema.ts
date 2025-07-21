@@ -3,7 +3,7 @@ import { SERVICE_INVOICE_STATUS_ENUM } from "../../../domains/enterprise/entitie
 
 export interface ServiceInvoiceDocument extends Document {
     id: string;
-    issueDate: Date;
+    issue_date: Date;
     status: SERVICE_INVOICE_STATUS_ENUM;
     notes?: string;
     provider: {
@@ -41,7 +41,7 @@ export interface ServiceInvoiceDocument extends Document {
 const ServiceInvoiceSchema = new Schema<ServiceInvoiceDocument>(
     {
         id: { type: String, required: true, index: true },
-        issueDate: { type: Date, required: true },
+        issue_date: { type: Date, required: true },
         status: {
             type: String,
             required: true,

@@ -1,7 +1,7 @@
 import { ServiceInvoice } from "src/domains/enterprise/entities/service-invoice";
 
 
-type nonUpdatableProps = "id" | "created_at" | "updated_at" | "status" | 'provider' | 'notes' | "issueDate";
+type nonUpdatableProps = "id" | "created_at" | "updated_at" | "status" | 'provider' | 'notes' | "issue_date";
 
 
 interface IUpdateServiceInvoiceDTO extends Omit<ServiceInvoice['props'], nonUpdatableProps> {

@@ -13,7 +13,7 @@ export enum SERVICE_INVOICE_STATUS_ENUM {
 }
 
 interface IProps {
-    issueDate: string; // "data_emissao"
+    issue_date: string; // "data_emissao"
     status?: SERVICE_INVOICE_STATUS_ENUM; // "status"
     notes?: string; // "observacoes"
     provider: {
@@ -153,8 +153,8 @@ class ServiceInvoice {
 
     // Validação de todos os campos obrigatórios
     private static validate(props: IProps) {
-        if (!props.issueDate)
-            throw new ServiceInvoiceException("issueDate is required");
+        if (!props.issue_date)
+            throw new ServiceInvoiceException("issue_date is required");
         if (!props.provider)
             throw new ServiceInvoiceException("provider is required");
 

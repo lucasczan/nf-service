@@ -8,7 +8,7 @@ class CreateServiceInvoiceUseCase {
     constructor(
         private providerRepository: IProviderRepository,
         private invoiceRepository: IInvoiceRepository
-    ) {}
+    ) { }
 
     async execute(
         createInvoiceDTO: ICreateInvoiceDTO
@@ -20,7 +20,7 @@ class CreateServiceInvoiceUseCase {
         if (!provider) throw new ProviderNotFoundException();
 
         const invoice = ServiceInvoice.create({
-            issueDate: createInvoiceDTO.issueDate,
+            issue_date: createInvoiceDTO.issue_date,
             provider: {
                 document: provider.document,
                 municipal_registration: provider.municipal_registration,
