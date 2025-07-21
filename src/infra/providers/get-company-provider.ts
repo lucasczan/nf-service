@@ -1,9 +1,15 @@
+import { cnpj } from "cpf-cnpj-validator";
+import { AppException } from "src/core/exceptions/app.exception";
 import { IGetCompanyDTO } from "src/domains/application/dtos/provider/get-company.dto";
 import { IGetCompanyProvider } from "src/domains/application/providers/get-company-by-document.provider";
 
 
 class GetCompanyProvider implements IGetCompanyProvider {
     getCompanyByDocument(document: string): Promise<IGetCompanyDTO> {
+        if (!cnpj.isValid(document)) {
+            throw new AppException("Invalid CNPJ document.", 400);
+        }
+
         const mock = {
             cnae_principal: '6201500',
             cnpj: document,

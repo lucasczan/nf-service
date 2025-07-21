@@ -164,5 +164,5 @@ Content-Type: application/json
 ###
 
 # @name getCompanyByDocument
-GET http://localhost:3000/companies/7878787
+GET http://localhost:3000/companies/06357254000148
 Content-Type: application/json
