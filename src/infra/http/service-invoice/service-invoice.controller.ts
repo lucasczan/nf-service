@@ -35,16 +35,17 @@ class InvoiceController {
         });
     }
 
-    @Get("/:document")
+    @Get("/:external_id")
     list(
         @Param() param: IListInvoicesParams,
         @Query() query: IListInvoicesQuery
     ) {
-        const { document } = param;
+        const { external_id } = param;
         const { status, name, page, recordsPerPage, search } = query;
 
+        console.log('HELLO', external_id)
         return this.invoiceService.listInvoices({
-            document,
+            external_id,
             status,
             name,
             search,

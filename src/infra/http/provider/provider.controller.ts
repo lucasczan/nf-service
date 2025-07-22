@@ -5,7 +5,7 @@ import { IUpdateProviderDTO } from "src/domains/application/dtos/update-provider
 
 @Controller("/providers")
 class ProviderController {
-    constructor(private providerService: ProviderService) {}
+    constructor(private providerService: ProviderService) { }
     @Post()
     create(@Body() body: ICreateProviderDTO) {
         const {
@@ -18,6 +18,7 @@ class ProviderController {
             mei_optant,
             simples_nacional_optant,
             services,
+            external_id,
         } = body;
 
         return this.providerService.createProvider({
@@ -30,6 +31,7 @@ class ProviderController {
             mei_optant,
             simples_nacional_optant,
             services,
+            external_id,
         });
     }
 

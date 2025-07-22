@@ -5,7 +5,10 @@ class InMemoryProviderRepository implements IProviderRepository {
 	private static instance: InMemoryProviderRepository | null = null;
 	private providers: Provider["props"][] = [];
 
-	private constructor() {}
+	private constructor() { }
+	findByExternalId(externalId: string): Promise<Provider | null> {
+		throw new Error("Method not implemented.");
+	}
 
 	async findById(id: string): Promise<Provider | null> {
 		const foundProvider = this.providers.find((provider) => provider.id === id);

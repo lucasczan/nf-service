@@ -17,6 +17,16 @@ export class ProviderMongooseRepository implements IProviderRepository {
         );
     }
 
+    async findByExternalId(externalId: string): Promise<Provider | null> {
+        const provider = await this.providerModel
+            .findOne({ external_id: externalId })
+
+        console.log({ externalId })
+        if (!provider) return null;
+
+        return this.toDomain(provider);
+    }
+
     async create(provider: Provider): Promise<Provider> {
         const providerCreated = await this.providerModel.create(provider.props);
         return this.toDomain(providerCreated);

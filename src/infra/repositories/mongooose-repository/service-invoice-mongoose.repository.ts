@@ -32,13 +32,13 @@ class ServiceInvoiceMongooseRepository implements IInvoiceRepository {
     async list(
         filters: IListServiceInvoicesDTO
     ): Promise<IListServiceInvoiceRepositoryReturn> {
-        const { document, page, recordsPerPage, name, search, status } =
+        const { external_id, page, recordsPerPage, name, search, status } =
             filters;
 
         const skip = (page - 1) * recordsPerPage;
 
         // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-        const query: any = { "provider.document": document };
+        const query: any = { "provider.external_id": external_id };
 
         if (status) query.status = status;
 
@@ -61,7 +61,7 @@ class ServiceInvoiceMongooseRepository implements IInvoiceRepository {
             this.model.find(query).skip(skip).limit(recordsPerPage),
 
             this.model.aggregate([
-                { $match: { "provider.document": document } },
+                { $match: { "provider.external_id": external_id } },
                 {
                     $group: {
                         _id: "$status",

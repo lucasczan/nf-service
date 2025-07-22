@@ -9,6 +9,7 @@ export interface ProviderDocument extends Document {
     simples_nacional_optant?: boolean;
     mei_optant: boolean;
     municipal_registration: string;
+    external_id: string; // ID externo para integração com outros sistemas
     address: {
         municipality_code: string;
         siafi_code: string;
@@ -35,6 +36,7 @@ const ProviderSchema = new Schema<ProviderDocument>(
         simples_nacional_optant: { type: Boolean },
         mei_optant: { type: Boolean, required: true },
         municipal_registration: { type: String, required: true },
+        external_id: { type: String, required: true },
         address: {
             municipality_code: { type: String, required: true },
             siafi_code: { type: String, required: true },

@@ -7,6 +7,7 @@ Content-Type: application/json
 
 {
     "document": "33333",
+    "external_id": "123456789",
     "company_name": "Test Company",
     "company_is_active": true,
     "main_CNAE": "1234567",
@@ -101,10 +102,10 @@ Content-Type: application/json
 ###
 
 ## List Invoices
-@provider_document = 1111111
+@external_id = 123456789
 
 # @name ListInvoices
-GET http://localhost:3000/invoices/{{provider_document}}?page=1&recordsPerPage=10&status=pending&search=lucas
+GET http://localhost:3000/invoices/{{external_id}}?page=1&recordsPerPage=10&status=pending&search=s
 Content-Type: application/json
 
 ###

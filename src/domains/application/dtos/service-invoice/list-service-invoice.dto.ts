@@ -1,7 +1,7 @@
 import { ServiceInvoice } from "src/domains/enterprise/entities/service-invoice";
 
 export interface IListServiceInvoicesDTO {
-    document: string;
+    external_id: string;
     status?: string;
     name?: string;
     page: number;
@@ -9,8 +9,8 @@ export interface IListServiceInvoicesDTO {
     recordsPerPage: number;
 }
 
-export type IListInvoicesParams = Pick<IListServiceInvoicesDTO, "document">;
-export type IListInvoicesQuery = Omit<IListServiceInvoicesDTO, "document">;
+export type IListInvoicesParams = Pick<IListServiceInvoicesDTO, "external_id">;
+export type IListInvoicesQuery = Omit<IListServiceInvoicesDTO, "external_id">;
 
 export interface IListInvoicesResponseDTO {
     invoices: ServiceInvoice["props"][];

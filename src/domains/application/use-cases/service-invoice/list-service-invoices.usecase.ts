@@ -5,7 +5,7 @@ import type {
 import type { IInvoiceRepository } from "../../repositories/invoice.repository";
 
 class ListServiceInvoicesUseCase {
-    constructor(private invoiceRepository: IInvoiceRepository) {}
+    constructor(private invoiceRepository: IInvoiceRepository) { }
 
     async execute(
         filters: IListServiceInvoicesDTO

@@ -4,16 +4,25 @@ import type { IProviderRepository } from "../../repositories/provider.repository
 import { ProviderAlreadyExists } from "../../exceptions/provider-already-exists.exception";
 
 class CreateProviderUseCase {
-    constructor(private providerRepository: IProviderRepository) {}
+    constructor(private providerRepository: IProviderRepository) { }
 
     async execute(
         createProviderDTO: ICreateProviderDTO
     ): Promise<Provider["props"]> {
-        const existingProvider = await this.providerRepository.findByDocument(
+        const existingProviderPromise = this.providerRepository.findByDocument(
             createProviderDTO.document
         );
 
-        if (existingProvider) throw new ProviderAlreadyExists();
+        const findByExternalIdPromise = this.providerRepository.findByExternalId(
+            createProviderDTO.external_id
+        );
+
+        const [existingProvider, existingExternalIdProvider] = await Promise.all([
+            existingProviderPromise,
+            findByExternalIdPromise
+        ]);
+
+        if (existingProvider || existingExternalIdProvider) throw new ProviderAlreadyExists();
 
         const provider = Provider.create(createProviderDTO);
         const createdProvider = await this.providerRepository.create(provider);

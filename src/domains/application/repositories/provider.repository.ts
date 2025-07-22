@@ -4,6 +4,7 @@ interface IProviderRepository {
 	create(Provider: Provider): Promise<Provider>;
 	findByDocument(document: string): Promise<Provider | null>;
 	findById(id: string): Promise<Provider | null>;
+	findByExternalId(externalId: string): Promise<Provider | null>;
 	update(provider: Provider): Promise<Provider>;
 }
 
